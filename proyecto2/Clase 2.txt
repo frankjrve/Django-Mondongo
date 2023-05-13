@@ -1,0 +1,102 @@
+Crear entorno virtual
+>python -m venv .venv
+
+Activar entorno virtual
+
+.venv\Scripts\activate.bat 
+
+Instalar Django
+
+pip install Django
+
+
+Instalar el Proyecto
+
+django-admin startproject proyecto2 .  
+
+Crear apps
+
+ python manage.py startapp [nombre del proyecto\app]
+
+Colocar las app en los settings
+
+Ir a settings revisar las apps instaladas
+linea 40  'Pages.app.PagesConfig'
+
+Crear base de datos
+ python manage.py migrate
+
+
+Correr el servidor local
+
+Creo el Template en el terminal
+
+mkdir templates
+
+Registrar el template en settings
+TEMPLATE  Dirs
+
+'DIRS': [BASE_DIR /"templates"]
+
+Creamos un archivo html en la carpeta template
+
+VIEWS
+- Vamos a views y colocamos la ruta
+
+linea 2 from django.views.generic import TemplateView
+
+creamos la clase ( REVISAR )
+class HomePageView(TemplateView):
+    template_name = 'home.html'
+
+CREAMOS UN ARCHIVO DE URL EN EL ARCHIVO PAGES ( PARA CREAR LA VISTA)
+
+URLS.PY
+from django.urls import path
+from .views import HomePageView
+
+urlpatterns = [
+    path("", HomePageView.as_view(), name=")
+]
+
+- Vamos a incorparar las rutas de las apps
+
+
+En el Url del proyecto 
+linea 18
+
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path("",include("pages.urls"))
+]
+
+Luego corremos el servidor
+
+Creamos el archivo Mondongo html en el templates
+
+Luego nos vamos al View de Pages
+
+class MondongoPageView(TemplateView):
+    template_name = 'Mondongo.html'
+
+Luego me a urls.py
+
+linea2 from .views import HomePageView, MondongoPageView
+ linea 6 
+
+urlpatterns = [
+    path("", HomePageView.as_view(), name="home"),
+    path("Mondongo/", MondongoPageView.as_view(), name="Mondongo"),
+    
+]
+
+
+
+
+python manage.py runserver
+
+ 
+
+
